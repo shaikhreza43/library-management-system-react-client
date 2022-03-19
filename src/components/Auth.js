@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -50,13 +51,32 @@ export default function Auth(props) {
   const [toggleLoginAndForgotPassword, setToggleLoginAndForgotPassword] =
     React.useState(true);
 
+  const navigate = useNavigate();
+
   const handleAuthSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
       password: data.get("password"),
+      role: data.get("role"),
     });
+    localStorage.setItem(
+      "session",
+      JSON.stringify({
+        email: data.get("email"),
+        password: data.get("password"),
+        role: data.get("role"),
+        name:"xyz"
+      })
+    );
+    if (data.get("role") === "admin") {
+      navigate("/admin-dashboard");
+    } else if (data.get("role") === "librarian") {
+      navigate("/librarian-dashboard");
+    } else if (data.get("role") === "student") {
+      navigate("/student-dashboard");
+    }
   };
 
   const handleResetPassword = (event) => {

@@ -1,7 +1,10 @@
-import React from 'react';
+import React from "react";
+import CommonHeader from "../CommonHeader";
 
 export default function LibrarianDashboard(props) {
   return (
-    <div>LibrarianDashboard</div>
-  )
+    <div>
+      <CommonHeader />
+    </div>
+  );
 }

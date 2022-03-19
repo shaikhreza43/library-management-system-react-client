@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -16,6 +17,8 @@ import {
 export default function CommonHeader(props) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const navigate = useNavigate();
+
   const toggle = () => {
     setIsOpen(!isOpen);
   };
@@ -30,6 +33,24 @@ export default function CommonHeader(props) {
             <NavItem>
               <NavLink href="/home">Home</NavLink>
             </NavItem>
+            {JSON.parse(localStorage.getItem("session")).role === "admin" && (
+              <>
+                <NavItem>
+                  <NavLink href="/admin-dashboard/" style={{whiteSpace:"nowrap"}}>
+                    Admin Dashboard
+                  </NavLink>
+                </NavItem>
+              </>
+            )}
+             {JSON.parse(localStorage.getItem("session")).role === "librarian" && (
+              <>
+                <NavItem>
+                  <NavLink href="/librarian-dashboard/" style={{whiteSpace:"nowrap"}}>
+                    Librarian Dashboard
+                  </NavLink>
+                </NavItem>
+              </>
+            )}
             <NavItem>
               <NavLink href="/about">About</NavLink>
             </NavItem>
@@ -39,23 +60,35 @@ export default function CommonHeader(props) {
             style={{ width: "100%" }}
             navbar
           >
-            <NavItem>
-              <NavLink href="/auth">Login</NavLink>
-            </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Welcome User
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>My Account</DropdownItem>
-                <DropdownItem>Request Book</DropdownItem>
-                <DropdownItem>Add Student</DropdownItem>
-                <DropdownItem>Add Librarian</DropdownItem>
-                <DropdownItem>Add Books</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Logout</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+            {!localStorage.getItem("session") && (
+              <NavItem>
+                <NavLink href="/auth">Login</NavLink>
+              </NavItem>
+            )}
+            {localStorage.getItem("session") &&
+              JSON.parse(localStorage.getItem("session")).name && (
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    Welcome {JSON.parse(localStorage.getItem("session")).name}
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem>My Account</DropdownItem>
+                    <DropdownItem>Request Book</DropdownItem>
+                    <DropdownItem>Add Student</DropdownItem>
+                    <DropdownItem>Add Librarian</DropdownItem>
+                    <DropdownItem>Add Books</DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem
+                      onClick={() => {
+                        localStorage.clear();
+                        navigate("/auth");
+                      }}
+                    >
+                      Logout
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              )}
           </Nav>
         </Collapse>
       </Navbar>
