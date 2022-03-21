@@ -33,24 +33,33 @@ export default function CommonHeader(props) {
             <NavItem>
               <NavLink href="/home">Home</NavLink>
             </NavItem>
-            {JSON.parse(localStorage.getItem("session")).role === "admin" && (
-              <>
-                <NavItem>
-                  <NavLink href="/admin-dashboard/" style={{whiteSpace:"nowrap"}}>
-                    Admin Dashboard
-                  </NavLink>
-                </NavItem>
-              </>
-            )}
-             {JSON.parse(localStorage.getItem("session")).role === "librarian" && (
-              <>
-                <NavItem>
-                  <NavLink href="/librarian-dashboard/" style={{whiteSpace:"nowrap"}}>
-                    Librarian Dashboard
-                  </NavLink>
-                </NavItem>
-              </>
-            )}
+            {JSON.parse(localStorage.getItem("session")) &&
+              JSON.parse(localStorage.getItem("session")).role === "admin" && (
+                <>
+                  <NavItem>
+                    <NavLink
+                      href="/admin-dashboard/"
+                      style={{ whiteSpace: "nowrap" }}
+                    >
+                      Admin Dashboard
+                    </NavLink>
+                  </NavItem>
+                </>
+              )}
+            {JSON.parse(localStorage.getItem("session")) &&
+              JSON.parse(localStorage.getItem("session")).role ===
+                "librarian" && (
+                <>
+                  <NavItem>
+                    <NavLink
+                      href="/librarian-dashboard/"
+                      style={{ whiteSpace: "nowrap" }}
+                    >
+                      Librarian Dashboard
+                    </NavLink>
+                  </NavItem>
+                </>
+              )}
             <NavItem>
               <NavLink href="/about">About</NavLink>
             </NavItem>
