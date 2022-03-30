@@ -1,4 +1,5 @@
 import React from "react";
+
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,11 +8,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button, Link, TablePagination, Typography } from "@mui/material";
+import { Button, TablePagination, Typography } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "grey",
+    backgroundColor: "purple",
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -29,7 +30,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function AllStudents() {
+export default function AllBooks(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -42,27 +43,27 @@ export default function AllStudents() {
     setPage(0);
   };
 
-  const [students, setStudents] = React.useState([
+  const [books, setBooks] = React.useState([
     {
-      id: 1,
-      name: "Ahmed",
-      rollNo: "101xd929",
-      mobileNumber: "9829892922",
-      userName: "someone@example.com",
+      bookId: 1,
+      bookName: "History class 10",
+      bookCoverImageUrl: "http://something.com",
+      bookAuthor: "Ahmed",
+      bookQuantity: 4,
     },
     {
-      id: 2,
-      name: "Reza",
-      rollNo: "102xd929",
-      mobileNumber: "92328782982",
-      userName: "abc@example.com",
+      bookId: 2,
+      bookName: "Geography class 9",
+      bookCoverImageUrl: "http://something.com",
+      bookAuthor: "Ahmed",
+      bookQuantity: 3,
     },
     {
-      id: 3,
-      name: "Shaikh",
-      rollNo: "103xd929",
-      mobileNumber: "98929191",
-      userName: "abcdeg@xyz.com",
+      bookId: 3,
+      bookName: "Math class 8",
+      bookCoverImageUrl: "http://something.com",
+      bookAuthor: "Ahmed",
+      bookQuantity: 5,
     },
   ]);
 
@@ -71,11 +72,11 @@ export default function AllStudents() {
       <div className="row">
         <div className="col-lg-12">
           <Typography variant="h5" color={"tomato"} align="center">
-            List of All Students
+            List of All Books Available
           </Typography>
           <Typography>
             <Button variant="contained" color="error">
-              Add a Student
+              Add a Book
             </Button>
           </Typography>
           <TableContainer
@@ -85,34 +86,34 @@ export default function AllStudents() {
             <Table sx={{ minWidth: 700 }}>
               <TableHead>
                 <TableRow>
-                  <StyledTableCell>Student Id</StyledTableCell>
-                  <StyledTableCell>Name</StyledTableCell>
-                  <StyledTableCell>Roll No</StyledTableCell>
-                  <StyledTableCell>Mobile Number</StyledTableCell>
-                  <StyledTableCell>Username</StyledTableCell>
+                  <StyledTableCell>Book Id</StyledTableCell>
+                  <StyledTableCell>Book Name</StyledTableCell>
+                  <StyledTableCell>Book Quantity</StyledTableCell>
+                  <StyledTableCell>Book Cover Image</StyledTableCell>
+                  <StyledTableCell>Book Author</StyledTableCell>
                   <StyledTableCell>Action</StyledTableCell>
-                  <StyledTableCell>Allot Book</StyledTableCell>
-                  <StyledTableCell>Alloted Books</StyledTableCell>
+                  <StyledTableCell>Allot Book to Student</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {students
+                {books
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((std) => (
-                    <StyledTableRow key={std.id}>
+                  .map((book) => (
+                    <StyledTableRow key={book.id}>
                       <StyledTableCell component="th" scope="row">
-                        {std.id}
+                        {book.bookId}
                       </StyledTableCell>
-                      <StyledTableCell>{std.name}</StyledTableCell>
-                      <StyledTableCell>{std.rollNo}</StyledTableCell>
-                      <StyledTableCell>{std.mobileNumber}</StyledTableCell>
-                      <StyledTableCell>{std.userName}</StyledTableCell>
+                      <StyledTableCell>{book.bookName}</StyledTableCell>
+                      <StyledTableCell>{book.bookQuantity}</StyledTableCell>
+                      <StyledTableCell>
+                        {book.bookCoverImageUrl}
+                      </StyledTableCell>
+                      <StyledTableCell>{book.bookAuthor}</StyledTableCell>
                       <StyledTableCell>Edit | Delete</StyledTableCell>
                       <StyledTableCell>
-                        <Button variant="contained" color="success">Allot a Book</Button>
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        <Link href="#">See All Alloted Books</Link>
+                        <Button variant="contained" color="secondary">
+                          Allot
+                        </Button>
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}
@@ -122,7 +123,7 @@ export default function AllStudents() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 20, 25, 50, 100, 200]}
             component="div"
-            count={students.length}
+            count={books.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

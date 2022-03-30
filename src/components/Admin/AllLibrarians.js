@@ -64,52 +64,59 @@ export default function AllLibrarians() {
   ]);
 
   return (
-    <div className="mt-3 mb-2">
-      <Typography variant="h5" color={"tomato"} align="center">
-        List of All Librarians
-      </Typography>
-      <Typography>
-        <Button variant="contained" color="primary">
-          Add a Librarian
-        </Button>
-      </Typography>
-      <TableContainer component={Paper} sx={{ width: "100%",marginTop:"10px" }}>
-        <Table sx={{ minWidth: 700 }}>
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Librarian Id</StyledTableCell>
-              <StyledTableCell>Name</StyledTableCell>
-              <StyledTableCell>Mobile Number</StyledTableCell>
-              <StyledTableCell>Username</StyledTableCell>
-              <StyledTableCell>Action</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {librarians
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((lib) => (
-                <StyledTableRow key={lib.id}>
-                  <StyledTableCell component="th" scope="row">
-                    {lib.id}
-                  </StyledTableCell>
-                  <StyledTableCell>{lib.name}</StyledTableCell>
-                  <StyledTableCell>{lib.mobileNumber}</StyledTableCell>
-                  <StyledTableCell>{lib.userName}</StyledTableCell>
-                  <StyledTableCell>Edit | Delete</StyledTableCell>
-                </StyledTableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 20, 25, 50, 100, 200]}
-        component="div"
-        count={librarians.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+    <div className="container-fluid mt-3 mb-2">
+      <div className="row">
+        <div className="col-lg-12">
+          <Typography variant="h5" color={"tomato"} align="center">
+            List of All Librarians
+          </Typography>
+          <Typography>
+            <Button variant="contained" color="primary">
+              Add a Librarian
+            </Button>
+          </Typography>
+          <TableContainer
+            component={Paper}
+            sx={{ width: "100%", marginTop: "10px" }}
+          >
+            <Table sx={{ minWidth: 700 }}>
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Librarian Id</StyledTableCell>
+                  <StyledTableCell>Name</StyledTableCell>
+                  <StyledTableCell>Mobile Number</StyledTableCell>
+                  <StyledTableCell>Username</StyledTableCell>
+                  <StyledTableCell>Action</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {librarians
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((lib) => (
+                    <StyledTableRow key={lib.id}>
+                      <StyledTableCell component="th" scope="row">
+                        {lib.id}
+                      </StyledTableCell>
+                      <StyledTableCell>{lib.name}</StyledTableCell>
+                      <StyledTableCell>{lib.mobileNumber}</StyledTableCell>
+                      <StyledTableCell>{lib.userName}</StyledTableCell>
+                      <StyledTableCell>Edit | Delete</StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 20, 25, 50, 100, 200]}
+            component="div"
+            count={librarians.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </div>
+      </div>
     </div>
   );
 }
