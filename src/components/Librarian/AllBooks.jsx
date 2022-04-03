@@ -49,6 +49,7 @@ export default function AllBooks(props) {
       bookName: "History class 10",
       bookCoverImageUrl: "http://something.com",
       bookAuthor: "Ahmed",
+      bookDescription: "Book Short Description",
       bookQuantity: 4,
     },
     {
@@ -56,6 +57,7 @@ export default function AllBooks(props) {
       bookName: "Geography class 9",
       bookCoverImageUrl: "http://something.com",
       bookAuthor: "Ahmed",
+      bookDescription: "Book Short Description",
       bookQuantity: 3,
     },
     {
@@ -63,6 +65,7 @@ export default function AllBooks(props) {
       bookName: "Math class 8",
       bookCoverImageUrl: "http://something.com",
       bookAuthor: "Ahmed",
+      bookDescription: "Book Short Description",
       bookQuantity: 5,
     },
   ]);
@@ -91,6 +94,7 @@ export default function AllBooks(props) {
                   <StyledTableCell>Book Quantity</StyledTableCell>
                   <StyledTableCell>Book Cover Image</StyledTableCell>
                   <StyledTableCell>Book Author</StyledTableCell>
+                  <StyledTableCell>Book Description</StyledTableCell>
                   <StyledTableCell>Action</StyledTableCell>
                   <StyledTableCell>Allot Book to Student</StyledTableCell>
                 </TableRow>
@@ -109,6 +113,7 @@ export default function AllBooks(props) {
                         {book.bookCoverImageUrl}
                       </StyledTableCell>
                       <StyledTableCell>{book.bookAuthor}</StyledTableCell>
+                      <StyledTableCell>{book.bookDescription}</StyledTableCell>
                       <StyledTableCell>Edit | Delete</StyledTableCell>
                       <StyledTableCell>
                         <Button variant="contained" color="secondary">

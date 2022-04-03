@@ -1,7 +1,14 @@
-import React from 'react';
+import React from "react";
+import CommonHeader from "../CommonHeader";
+import BookCards from "./BookCards";
+import SearchBooks from "./SearchBooks";
 
 export default function StudentDashboard(props) {
   return (
-    <div>StudentDashboard</div>
-  )
+    <div>
+      <CommonHeader />
+      <SearchBooks />
+      <BookCards />
+    </div>
+  );
 }

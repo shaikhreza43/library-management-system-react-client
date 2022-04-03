@@ -60,6 +60,28 @@ export default function CommonHeader(props) {
                   </NavItem>
                 </>
               )}
+              {JSON.parse(localStorage.getItem("session")) &&
+              JSON.parse(localStorage.getItem("session")).role ===
+                "student" && (
+                <>
+                  <NavItem>
+                    <NavLink
+                      href="/student-dashboard/"
+                      style={{ whiteSpace: "nowrap" }}
+                    >
+                      Student Dashboard
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      href="/books-alloted/"
+                      style={{ whiteSpace: "nowrap" }}
+                    >
+                      Alloted Books
+                    </NavLink>
+                  </NavItem>
+                </>
+              )}
             <NavItem>
               <NavLink href="/about">About</NavLink>
             </NavItem>
